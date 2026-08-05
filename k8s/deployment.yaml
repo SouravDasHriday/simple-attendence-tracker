@@ -1,14 +1,18 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: simple-attendance-tracker
-  lables:
+  labels:                                 # Fixed: lables -> labels
     app: simple-attendance-tracker
 spec:
   replicas: 2
   selector:
-    matchLevels:
+    matchLabels:                          # Fixed: matchLevels -> matchLabels
       app: simple-attendance-tracker
+  template:                               # Added: template block
+    metadata:
+      labels:                             # Added: Pod labels (must match selector)
+        app: simple-attendance-tracker
     spec:
       containers:
         - name: simple-attendence-tracker
@@ -22,4 +26,3 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "200m"
-
