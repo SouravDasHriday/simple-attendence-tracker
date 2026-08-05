@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: simple-attendence-tracker
-          image: souravdasdocker/simple-attendence-tracker
+          image: souravdasdocker/simple-attendence-tracker:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           resources:
