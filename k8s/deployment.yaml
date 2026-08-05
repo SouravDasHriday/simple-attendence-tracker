@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: simple-attendance-tracker
+  lables:
+    app: simple-attendance-tracker
+spec:
+  replicas: 2
+  selector:
+    matchLevels:
+      app: simple-attendance-tracker
+    spec:
+      containers:
+        - name: simple-attendence-tracker
+          image: souravdasdocker/simple-attendence-tracker
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+
