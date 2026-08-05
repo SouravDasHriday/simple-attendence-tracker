@@ -7,6 +7,11 @@ pipeline {
         // Docker Hub image path
         IMAGE_NAME = "souravdasdocker/simple-attendence-tracker"
     }
+    
+    triggers {
+	githubPush()	
+    }
+
 
     stages {
         stage('Checkout') {
