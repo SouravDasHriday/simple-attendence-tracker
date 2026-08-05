@@ -4,8 +4,8 @@ pipeline {
     environment {
         // Jenkins credential binding for Docker Hub login
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
-        // Your Docker Hub image path
-        IMAGE_NAME = "souravdasdocker/simple-attendence-tracker.git"
+        // Docker Hub image path
+        IMAGE_NAME = "souravdasdocker/simple-attendence-tracker"
     }
 
     stages {
@@ -22,6 +22,12 @@ pipeline {
                 // Build and tag with the Jenkins build number
                 sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
                 sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest"
+            }
+        }
+	
+        stage('Trivy Scan') {
+             steps {
+                sh "trivy image --exit-code 1 --severity CRITICAL --format table ${IMAGE_NAME}:${BUILD_NUMBER}"
             }
         }
 
