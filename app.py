@@ -42,7 +42,5 @@ def check_in():
             writer.writerow([name, date_str, time_str, status])
             
     return redirect(url_for("index"))
-
 if __name__ == "__main__":
-    init_csv()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
